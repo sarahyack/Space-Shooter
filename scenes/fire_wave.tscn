@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7ycvwuco241h"]
+
+[ext_resource type="Texture2D" uid="uid://dn8ak6b7bs5d" path="res://Assets/PNG/Effects/fire10.png" id="1_558o3"]
+[ext_resource type="Script" path="res://scenes/fire_wave.gd" id="1_pnvjt"]
+[ext_resource type="AudioStream" uid="uid://d0pnwbsxkfi6e" path="res://Assets/Bonus/firewave.ogg" id="3_0k1fs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5asmw"]
+size = Vector2(2296, 1462)
+
+[node name="FireWave" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_pnvjt")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(139.125, 36.85)
+texture = ExtResource("1_558o3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5asmw")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 9.0
+one_shot = true
+autostart = true
+
+[node name="FireWaveSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0k1fs")
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

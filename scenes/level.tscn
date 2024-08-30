@@ -1,0 +1,157 @@
+[gd_scene load_steps=17 format=3 uid="uid://lpwtov5rcsu1"]
+
+[ext_resource type="Texture2D" uid="uid://xlqbeadxtr4d" path="res://Assets/Backgrounds/black.png" id="1_ot6ak"]
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_pkcin"]
+[ext_resource type="PackedScene" uid="uid://d6b8bhji2mgg" path="res://scenes/player.tscn" id="2_05pvt"]
+[ext_resource type="AudioStream" uid="uid://bpkhgkluwnytp" path="res://Assets/Bonus/explosion.wav" id="3_xfkmo"]
+[ext_resource type="Script" path="res://scenes/spawner.gd" id="4_tl7vu"]
+[ext_resource type="AudioStream" uid="uid://drbnjffyimlkm" path="res://Assets/Bonus/game-music.mp3" id="4_vnwm6"]
+[ext_resource type="AudioStream" uid="uid://cr53a3xoyiol3" path="res://Assets/Bonus/sfx_twoTone.ogg" id="5_h3ntr"]
+[ext_resource type="PackedScene" uid="uid://bojuah7mf6g0d" path="res://scenes/ui.tscn" id="5_wjmu4"]
+[ext_resource type="AudioStream" uid="uid://b8o4n7v7m7mmn" path="res://Assets/Bonus/weapons-power-up.wav" id="6_c5m50"]
+[ext_resource type="AudioStream" uid="uid://ludhvygbesb8" path="res://Assets/Bonus/health-up.wav" id="7_a5jp3"]
+[ext_resource type="AudioStream" uid="uid://jtqtsy0cba5x" path="res://Assets/Bonus/big distant thump 1.wav" id="8_132qh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqbht"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqbp"]
+size = Vector2(1280, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlsjs"]
+size = Vector2(280, 1714)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twcfo"]
+size = Vector2(2861, 258)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwqe0"]
+size = Vector2(5152, 188)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_pkcin")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(665.5, 365.5)
+scale = Vector2(8.929, 5)
+texture = ExtResource("1_ot6ak")
+metadata/_edit_lock_ = true
+
+[node name="StarSpawner" type="Timer" parent="."]
+autostart = true
+
+[node name="Stars" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("3_xfkmo")
+volume_db = -5.0
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_vnwm6")
+
+[node name="Comms" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_h3ntr")
+
+[node name="WeaponsPowerUp" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_c5m50")
+
+[node name="HealthUp" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("7_a5jp3")
+
+[node name="Destruction" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("8_132qh")
+volume_db = -14.0
+
+[node name="Player" parent="." instance=ExtResource("2_05pvt")]
+position = Vector2(641, 537)
+
+[node name="Borders" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Inner" type="StaticBody2D" parent="Borders"]
+collision_layer = 4
+
+[node name="Right" type="CollisionShape2D" parent="Borders/Inner"]
+position = Vector2(1303, 358)
+shape = SubResource("RectangleShape2D_rqbht")
+
+[node name="Left" type="CollisionShape2D" parent="Borders/Inner"]
+position = Vector2(-20, 356)
+shape = SubResource("RectangleShape2D_rqbht")
+
+[node name="Top" type="CollisionShape2D" parent="Borders/Inner"]
+position = Vector2(640, -29)
+shape = SubResource("RectangleShape2D_vgqbp")
+metadata/_edit_lock_ = true
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders/Inner"]
+position = Vector2(639, 745)
+shape = SubResource("RectangleShape2D_vgqbp")
+
+[node name="Outer" type="StaticBody2D" parent="Borders" groups=["borders"]]
+collision_layer = 64
+collision_mask = 26
+
+[node name="Left" type="CollisionShape2D" parent="Borders/Outer"]
+position = Vector2(-612, 1319)
+shape = SubResource("RectangleShape2D_hlsjs")
+
+[node name="Right" type="CollisionShape2D" parent="Borders/Outer"]
+position = Vector2(1963, 1313)
+shape = SubResource("RectangleShape2D_hlsjs")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders/Outer"]
+position = Vector2(675, 2297)
+shape = SubResource("RectangleShape2D_twcfo")
+
+[node name="Top" type="CollisionShape2D" parent="Borders/Outer"]
+position = Vector2(654, -2315)
+shape = SubResource("RectangleShape2D_hwqe0")
+
+[node name="Spawner" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+script = ExtResource("4_tl7vu")
+
+[node name="PowerUpSpawner" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Lasers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="PowerUps" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("5_wjmu4")]
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="FireWaveStartPos" type="Marker2D" parent="Markers"]
+position = Vector2(643, 1560)
+metadata/_edit_lock_ = true
+
+[node name="AllyPos1" type="Marker2D" parent="Markers"]
+position = Vector2(400, 844)
+metadata/_edit_lock_ = true
+
+[node name="AllyPos2" type="Marker2D" parent="Markers"]
+position = Vector2(400, 644)
+metadata/_edit_lock_ = true
+
+[node name="AllyPos3" type="Marker2D" parent="Markers"]
+position = Vector2(885, 844)
+metadata/_edit_lock_ = true
+
+[node name="AllyPos4" type="Marker2D" parent="Markers"]
+position = Vector2(886, 644)
+metadata/_edit_lock_ = true
+
+[connection signal="timeout" from="StarSpawner" to="." method="_on_star_spawner_timeout"]
+[connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
+[connection signal="timeout" from="Spawner" to="." method="_on_spawner_timeout"]
+[connection signal="timeout" from="PowerUpSpawner" to="." method="_on_power_up_spawner_timeout"]

@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://pwd4pn0af2hq"]
+
+[ext_resource type="Texture2D" uid="uid://bemhriwta65vp" path="res://Assets/PNG/Effects/shield3.png" id="1_giuej"]
+[ext_resource type="Script" path="res://scenes/shield.gd" id="1_we8my"]
+[ext_resource type="Texture2D" uid="uid://dst86xgksjywp" path="res://Assets/PNG/Effects/shield2.png" id="2_gw3r3"]
+[ext_resource type="Texture2D" uid="uid://b17v1kh7xi4es" path="res://Assets/PNG/Effects/shield1.png" id="3_oqs84"]
+[ext_resource type="AudioStream" uid="uid://dwvby2aq27lwp" path="res://Assets/Bonus/sfx_shieldUp.ogg" id="4_s4xyp"]
+[ext_resource type="AudioStream" uid="uid://cawnwc242ed2i" path="res://Assets/Bonus/sfx_shieldDown.ogg" id="5_nekui"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6vjo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_giuej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gw3r3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oqs84")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"shield_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_oqs84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gw3r3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_giuej")
+}],
+"loop": false,
+"name": &"shield_up",
+"speed": 6.0
+}]
+
+[node name="Shield" type="Node2D" groups=["shield"]]
+script = ExtResource("1_we8my")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f6vjo")
+animation = &"shield_down"
+frame = 3
+frame_progress = 1.0
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="ShieldUpSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("4_s4xyp")
+
+[node name="ShieldDownSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_nekui")
+
+[node name="ShieldCountdown" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="DestroyTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShieldCountdown" to="." method="_on_shield_countdown_timeout"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

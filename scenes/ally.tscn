@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://j0ewa5gpvys7"]
+
+[ext_resource type="Texture2D" uid="uid://dv7pfhym5g7iv" path="res://Assets/PNG/playerShip3_green.png" id="1_1k3l7"]
+[ext_resource type="Script" path="res://scenes/ally.gd" id="1_1vgoo"]
+[ext_resource type="Texture2D" uid="uid://t1ap73yx6pfb" path="res://Assets/PNG/Effects/fire02.png" id="1_euwlr"]
+[ext_resource type="AudioStream" uid="uid://dkvbmkj0caeva" path="res://Assets/Bonus/sfx_zap.ogg" id="2_5u6on"]
+[ext_resource type="Texture2D" uid="uid://cgi6sn8vivxe0" path="res://Assets/PNG/Effects/fire06.png" id="2_meexf"]
+[ext_resource type="Texture2D" uid="uid://brvs7vhrioyv0" path="res://Assets/PNG/Effects/fire07.png" id="3_4s4ue"]
+[ext_resource type="Texture2D" uid="uid://bemhriwta65vp" path="res://Assets/PNG/Effects/shield3.png" id="6_5jatl"]
+[ext_resource type="AudioStream" uid="uid://fu8xl386mcto" path="res://Assets/Bonus/sfx_laser1.ogg" id="7_1lrfi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2ayj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_euwlr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_meexf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4s4ue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_meexf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_euwlr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ally" type="CharacterBody2D" groups=["ally"]]
+collision_layer = 32
+collision_mask = 34
+script = ExtResource("1_1vgoo")
+amount = 5
+starting_positions = Array[Vector2]([Vector2(0, 0)])
+
+[node name="Thrusters" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 40)
+scale = Vector2(1.42857, 1.41935)
+sprite_frames = SubResource("SpriteFrames_d2ayj")
+autoplay = "default"
+frame_progress = 0.153564
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, -36, 3, -37, 10, -20, 47, 25, 20, 25, 12, 35, -11, 35, -21, 26, -48, 26, -9, -20)
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1k3l7")
+
+[node name="Shield" type="Sprite2D" parent="."]
+texture = ExtResource("6_5jatl")
+
+[node name="ShootTime" type="Timer" parent="."]
+wait_time = 0.35
+autostart = true
+
+[node name="FrontLaserPosition" type="Marker2D" parent="."]
+position = Vector2(0, -45)
+
+[node name="RightLaserPosition" type="Marker2D" parent="."]
+position = Vector2(38, 0)
+
+[node name="LeftLaserPosition" type="Marker2D" parent="."]
+position = Vector2(-38, 0)
+
+[node name="Arrival" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5u6on")
+
+[node name="AllyLaserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1lrfi")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 12.0
+one_shot = true
+autostart = true
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 9.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ShootTime" to="." method="_on_shoot_time_timeout"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]

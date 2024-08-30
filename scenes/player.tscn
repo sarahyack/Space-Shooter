@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://d6b8bhji2mgg"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_j0qvw"]
+[ext_resource type="Texture2D" uid="uid://dtxhb40y1t21i" path="res://Assets/PNG/playerShip1_blue.png" id="2_2yjcw"]
+[ext_resource type="Texture2D" uid="uid://bqbrx2g4wh8xa" path="res://Assets/PNG/Effects/fire01.png" id="2_ud2y7"]
+[ext_resource type="Texture2D" uid="uid://dp25jlanqhjil" path="res://Assets/PNG/Effects/fire04.png" id="3_wterp"]
+[ext_resource type="AudioStream" uid="uid://7ykfgam1y655" path="res://Assets/Bonus/sfx_laser2.ogg" id="3_xjrne"]
+[ext_resource type="Texture2D" uid="uid://dbaqvtksri511" path="res://Assets/PNG/Effects/fire05.png" id="4_uihsv"]
+[ext_resource type="AudioStream" uid="uid://bn3gdtaevil72" path="res://Assets/Bonus/weapons-power-down.wav" id="7_e7goh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3lej"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ud2y7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wterp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uihsv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wterp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ud2y7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 22
+script = ExtResource("1_j0qvw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 27.8125)
+scale = Vector2(0.785715, 0.850806)
+sprite_frames = SubResource("SpriteFrames_d3lej")
+autoplay = "default"
+frame = 1
+frame_progress = 0.815483
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(0.80303, 0.74)
+texture = ExtResource("2_2yjcw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, -28, 6, -27, 9, -9, 29, 3, 37, -2, 36, 13, 10, 19, 6, 27, -5, 27, -10, 19, -37, 13, -39, -3, -30, 2, -10, -7)
+
+[node name="LaserStartPos" type="Marker2D" parent="."]
+position = Vector2(0, -40)
+scale = Vector2(-0.24852, 1733.86)
+
+[node name="ShootCountdown" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_xjrne")
+
+[node name="LeftGunPos" type="Marker2D" parent="."]
+position = Vector2(-37, -10)
+
+[node name="RightGunPos" type="Marker2D" parent="."]
+position = Vector2(37, -10)
+
+[node name="ShootTimeResetTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="WeaponsPowerDown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_e7goh")
+
+[connection signal="timeout" from="ShootCountdown" to="." method="_on_shoot_countdown_timeout"]
+[connection signal="timeout" from="ShootTimeResetTimer" to="." method="_on_shoot_time_reset_timer_timeout"]

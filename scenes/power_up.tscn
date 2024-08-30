@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://wooo3ym8u1fp"]
+
+[ext_resource type="Texture2D" uid="uid://c64grpfyb01x3" path="res://Assets/PNG/Power-ups/shield_gold.png" id="1_2h5gk"]
+[ext_resource type="Script" path="res://scenes/power_up.gd" id="1_smvl3"]
+[ext_resource type="Texture2D" uid="uid://qmyj63dfwasm" path="res://Assets/PNG/Power-ups/bolt_gold.png" id="2_pdl3i"]
+[ext_resource type="Texture2D" uid="uid://cn2tkvk0gpdfa" path="res://Assets/PNG/Power-ups/pill_yellow.png" id="3_xryi1"]
+[ext_resource type="Texture2D" uid="uid://dgp270j3hvh2x" path="res://Assets/PNG/Power-ups/star_gold.png" id="5_lbkpw"]
+[ext_resource type="Texture2D" uid="uid://clt7qnrj2q5ef" path="res://Assets/PNG/Power-ups/things_gold.png" id="6_lfijb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gddcw"]
+radius = 53.0
+
+[node name="PowerUp" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_smvl3")
+textures = Array[Texture2D]([ExtResource("2_pdl3i"), ExtResource("3_xryi1"), ExtResource("1_2h5gk"), ExtResource("5_lbkpw"), ExtResource("6_lfijb")])
+assign_power_up_position = Array[StringName]([&"Power", &"Health", &"Shield", &"Help", &"Weapon"])
+speed = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gddcw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

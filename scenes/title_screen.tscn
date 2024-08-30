@@ -1,0 +1,207 @@
+[gd_scene load_steps=16 format=3 uid="uid://cixxd0vx8jgli"]
+
+[ext_resource type="FontFile" uid="uid://vai2j3ttk6e3" path="res://Assets/Bonus/kenvector_future.ttf" id="1_h5s3b"]
+[ext_resource type="Script" path="res://scenes/title_screen.gd" id="1_kdy3f"]
+[ext_resource type="PackedScene" uid="uid://lpwtov5rcsu1" path="res://scenes/level.tscn" id="2_jheti"]
+[ext_resource type="Texture2D" uid="uid://dtxhb40y1t21i" path="res://Assets/PNG/playerShip1_blue.png" id="3_ci1qv"]
+[ext_resource type="Texture2D" uid="uid://bqbrx2g4wh8xa" path="res://Assets/PNG/Effects/fire01.png" id="3_q1461"]
+[ext_resource type="FontFile" uid="uid://ch0pgjniub3as" path="res://Assets/Bonus/kenvector_future_thin.ttf" id="3_t3j66"]
+[ext_resource type="AudioStream" uid="uid://lb1td5gkkog8" path="res://Assets/Bonus/title-music.mp3" id="4_cvk0e"]
+[ext_resource type="Texture2D" uid="uid://dp25jlanqhjil" path="res://Assets/PNG/Effects/fire04.png" id="4_st5rf"]
+[ext_resource type="PackedScene" uid="uid://dk1lslu7irsl2" path="res://scenes/control_panel.tscn" id="8_k2cco"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jwurc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_q1461")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_st5rf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_st5rf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q1461")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qox7"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57ypq"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfspi"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgubh"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukrha"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kdy3f")
+first_level = ExtResource("2_jheti")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Decor" type="CanvasLayer" parent="."]
+
+[node name="Stars" type="Node2D" parent="Decor"]
+
+[node name="StarSpawner" type="Timer" parent="Decor/Stars"]
+autostart = true
+
+[node name="Ship" type="Node2D" parent="Decor"]
+position = Vector2(629, 584)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Decor/Ship"]
+position = Vector2(0, 30)
+scale = Vector2(1.57143, 1.46774)
+sprite_frames = SubResource("SpriteFrames_jwurc")
+autoplay = "default"
+frame = 3
+frame_progress = 0.798027
+metadata/_edit_lock_ = true
+
+[node name="PlayerImage" type="Sprite2D" parent="Decor/Ship"]
+scale = Vector2(0.80303, 0.74)
+texture = ExtResource("3_ci1qv")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 30
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_fonts/font = ExtResource("1_h5s3b")
+theme_override_font_sizes/font_size = 72
+text = "SpaceShooter"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 45
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Exit")
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_right = NodePath("../Controls")
+focus_neighbor_bottom = NodePath("../Controls")
+focus_next = NodePath("../Controls")
+focus_previous = NodePath("../Exit")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_colors/font_hover_color = Color(0.713726, 1, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_t3j66")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1qox7")
+text = "Play"
+
+[node name="Controls" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Play")
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_right = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Play")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_colors/font_hover_color = Color(0.713726, 1, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_t3j66")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_57ypq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pfspi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hgubh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_hgubh")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hgubh")
+toggle_mode = true
+text = "Controls"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Controls")
+focus_neighbor_top = NodePath("../Controls")
+focus_neighbor_right = NodePath("../Play")
+focus_neighbor_bottom = NodePath("../Play")
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Controls")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_colors/font_hover_color = Color(0.713726, 1, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_t3j66")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ukrha")
+text = "Exit"
+
+[node name="ControlPanel" parent="." instance=ExtResource("8_k2cco")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 839.0
+offset_top = 201.0
+offset_right = 1223.0
+offset_bottom = 521.0
+grow_vertical = 1
+size_flags_horizontal = 8
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cvk0e")
+
+[connection signal="timeout" from="Decor/Stars/StarSpawner" to="." method="_on_star_spawner_timeout"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="toggled" from="VBoxContainer/Controls" to="." method="_on_controls_toggled"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

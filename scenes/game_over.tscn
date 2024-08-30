@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfpcqq22p3lhy"]
+
+[ext_resource type="Script" path="res://scenes/game_over.gd" id="1_hrmig"]
+[ext_resource type="FontFile" uid="uid://vai2j3ttk6e3" path="res://Assets/Bonus/kenvector_future.ttf" id="1_nctab"]
+[ext_resource type="FontFile" uid="uid://ch0pgjniub3as" path="res://Assets/Bonus/kenvector_future_thin.ttf" id="2_o7d6c"]
+[ext_resource type="PackedScene" uid="uid://lpwtov5rcsu1" path="res://scenes/level.tscn" id="2_vit7m"]
+[ext_resource type="PackedScene" uid="uid://cixxd0vx8jgli" path="res://scenes/title_screen.tscn" id="3_gql7n"]
+[ext_resource type="AudioStream" uid="uid://c4eeaxe3h4i5k" path="res://Assets/Bonus/sfx_lose.ogg" id="5_fuaov"]
+[ext_resource type="PackedScene" uid="uid://cyjfgdxq3ess5" path="res://scenes/mobile_controls.tscn" id="7_g31px"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hrmig")
+level_scene = ExtResource("2_vit7m")
+title_scene = ExtResource("3_gql7n")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -117.0
+offset_right = 258.0
+offset_bottom = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_fonts/font = ExtResource("1_nctab")
+theme_override_font_sizes/font_size = 72
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86073, 1, 0.976974, 1)
+theme_override_fonts/font = ExtResource("2_o7d6c")
+theme_override_font_sizes/font_size = 30
+text = "Your Score: "
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="StartAgain" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_fonts/font = ExtResource("1_nctab")
+theme_override_font_sizes/font_size = 24
+text = "Press Space Or Click To Start Again
+
+Press Enter for Main Menu"
+horizontal_alignment = 1
+
+[node name="Lose" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fuaov")
+volume_db = 4.0
+
+[node name="MobileControls" parent="." instance=ExtResource("7_g31px")]
