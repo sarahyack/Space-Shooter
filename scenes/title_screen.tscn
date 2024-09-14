@@ -34,7 +34,7 @@ animations = [{
 bg_color = Color(0, 0, 0, 1)
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57ypq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgubh"]
 bg_color = Color(0, 0, 0, 1)
 border_color = Color(0, 0, 0, 1)
 
@@ -42,7 +42,7 @@ border_color = Color(0, 0, 0, 1)
 bg_color = Color(0, 0, 0, 1)
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgubh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57ypq"]
 bg_color = Color(0, 0, 0, 1)
 border_color = Color(0, 0, 0, 1)
 
@@ -133,16 +133,16 @@ focus_neighbor_right = NodePath("../Controls")
 focus_neighbor_bottom = NodePath("../Controls")
 focus_next = NodePath("../Controls")
 focus_previous = NodePath("../Exit")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
 theme_override_colors/font_hover_color = Color(0.713726, 1, 0.941176, 1)
+theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_t3j66")
 theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1qox7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1qox7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1qox7")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_1qox7")
-theme_override_styles/focus = SubResource("StyleBoxFlat_1qox7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1qox7")
 text = "Play"
 
 [node name="Controls" type="Button" parent="VBoxContainer"]
@@ -153,16 +153,16 @@ focus_neighbor_right = NodePath("../Exit")
 focus_neighbor_bottom = NodePath("../Exit")
 focus_next = NodePath("../Exit")
 focus_previous = NodePath("../Play")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
 theme_override_colors/font_hover_color = Color(0.713726, 1, 0.941176, 1)
+theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_t3j66")
 theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_57ypq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hgubh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_hgubh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pfspi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_hgubh")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_hgubh")
-theme_override_styles/focus = SubResource("StyleBoxFlat_hgubh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_57ypq")
 toggle_mode = true
 text = "Controls"
 
@@ -174,16 +174,16 @@ focus_neighbor_right = NodePath("../Play")
 focus_neighbor_bottom = NodePath("../Play")
 focus_next = NodePath("../Play")
 focus_previous = NodePath("../Controls")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
 theme_override_colors/font_hover_color = Color(0.713726, 1, 0.941176, 1)
+theme_override_colors/font_pressed_color = Color(0.556863, 1, 0.941176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_t3j66")
 theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ukrha")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ukrha")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ukrha")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_ukrha")
-theme_override_styles/focus = SubResource("StyleBoxFlat_ukrha")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukrha")
 text = "Exit"
 
 [node name="ControlPanel" parent="." instance=ExtResource("8_k2cco")]

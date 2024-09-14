@@ -13,6 +13,8 @@ func _ready():
 		$MobileControls/TouchUp.hide()
 		$MobileControls/TouchDown.hide()
 		$MobileControls/TouchShoot.hide()
+	elif Input.get_connected_joypads().size() != 0:
+		$MarginContainer/StartAgain.text = "Press A to Start Again or Y to Quit"
 
 func _input(event):
 	if event.is_action_pressed('interact') and $MobileControls/TouchMenu.is_pressed() != true:
@@ -22,4 +24,3 @@ func _input(event):
 	if event.is_action_pressed("quit"):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
-

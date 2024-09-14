@@ -9,6 +9,11 @@ func _ready():
 	$ControlPanel.visible = false
 	if DisplayServer.is_touchscreen_available():
 		$VBoxContainer/Controls.hide()
+	if Input.get_connected_joypads().size() !=0:
+		$VBoxContainer/Play.grab_focus()
+		print($VBoxContainer/Play.has_focus())
+		$ControlPanel/VBoxContainer/HBoxContainer/Move.text = "Left Joystick to Move"
+		$ControlPanel/VBoxContainer/HBoxContainer2/Shoot.text ="Right Trigger to Shoot"
 
 func _on_play_pressed():
 	get_tree().call_deferred("change_scene_to_packed", first_level)
